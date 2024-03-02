@@ -34,3 +34,22 @@ var questions = [
     },
   ];
   
+
+  const quizQuestions = [
+    {
+        question: 'What does CSS stand for?',
+        options: ['Cascading Style Sheeps', 'Cascading Style Sheets',
+    'Cascading Style Sheats'],
+    correctAnswer: 'Cascading Style Sheets',
+    },
+    {
+        question: 'Where should the <script> tag go on your HTML code?',
+        options: ['Above the <body> tag', 'Anywhere you want', 'Above the </body> tag'],
+        correctAnswer: 'Above the </body> tag',
+    },
+    {
+        question: 'In JavaScript, a string is surrounded by what?',
+        options: ['Quotation marks', 'Nothing', 'Back-slashes'],
+        correctAnswer: 'Quotation marks',
+    }
+];
