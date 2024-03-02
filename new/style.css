@@ -1,0 +1,30 @@
+body {
+    background-color: grey;
+    display: block;
+}
+
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: oblique;
+    display: flex;
+    justify-content: center;
+}
+#quiz-container {
+    display: flex;
+    align-content: center;
+}
+p {
+    display: flex;
+    align-items: center;
+    border-style: solid 1px black;
+    font-size: larger;
+}
+
+button {
+    display: flex;
+    padding: 5px;
+    margin: 5px;
+    background-color: skyblue;
+border-radius: 10px;
+align-items: center;
+}
