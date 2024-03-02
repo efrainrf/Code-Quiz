@@ -1,6 +1,7 @@
 const quizContainer = document.getElementById('quiz-container');
 const startButton = document.getElementById('start-button');
 let userScore = 0;
+let currentQuestionIndex = 0;
 
 const quizQuestions = [
     {
@@ -11,8 +12,8 @@ const quizQuestions = [
     },
     {
         question: 'Where should the <script> tag go on your HTML code?',
-        options: ['Above the <body> tag', 'Anywhere you want', 'Above the </body> tag'],
-        correctAnswer: 'Above the </body> tag',
+        options: ['Above the <body> tag', 'Anywhere you want', 'Above the last </body> tag'],
+        correctAnswer: 'Above the last </body> tag',
     },
     {
         question: 'In JavaScript, a string is surrounded by what?',
@@ -23,27 +24,23 @@ const quizQuestions = [
 
 function startQuiz() {
     startButton.style.display = 'none';
-    showQuestion(0);
+    showQuestion(currentQuestionIndex);
 }
-
 
 function showQuestion(questionIndex) {
     quizContainer.innerHTML = '';
 
-    if (questionIndex < quizQuestions.length) {
-        const questionObject = quizQuestions[questionIndex];
-        const questionText = document.createElement('p');
-        questionText.textContent = questionObject.question;
-        quizContainer.appendChild(questionText);
+    const questionObject = quizQuestions[questionIndex];
+    const questionText = document.createElement('p');
+    questionText.textContent = questionObject.question;
+    quizContainer.appendChild(questionText);
 
-        questionObject.options.forEach((option, index) => {
-            const optionButton = document.createElement('button');
-            optionButton.textContent = option;
-            optionButton.addEventListener('click', () => handleAnswer(index, questionObject));
-            quizContainer.appendChild(optionButton);
+    questionObject.options.forEach((option, index) => {
+        const optionButton = document.createElement('button');
+        optionButton.textContent = option;
+        optionButton.addEventListener('click', () => handleAnswer(index, questionObject));
+        quizContainer.appendChild(optionButton);
     });
-    }
-
 }
 
 function handleAnswer(selectedIndex, questionObject) {
@@ -51,25 +48,30 @@ function handleAnswer(selectedIndex, questionObject) {
     const correctAnswer = questionObject.correctAnswer;
 
     if (selectedOption === correctAnswer) {
-        const nextQuestionIndex = nextQuestionIndex + 1;
-        showQuestion(nextQuestionIndex);   
+        
         updateScore(true);
     } else {
         alert("Wrong Answer!");
     }
 
-    // Move on to the next question
-    const nextQuestionIndex = nextQuestionIndex + 1;
-    showQuestion(nextQuestionIndex);  
+    
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizQuestions.length) {
+        showQuestion(currentQuestionIndex);
+    } else {
+        
+        showResults();
+    }
 }
 
-
-function saveScore() {
-    localStorage.setItem('quizUserScore', userScore);
+function updateScore(ifCorrect) {
+    if (ifCorrect) {
+        userScore++;
+    }
 }
 
-
-function showLeaderboard() {
+function showResults() {
+    console.log('Quiz completed! Your score:', userScore);
     
 }
 
